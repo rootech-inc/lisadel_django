@@ -1,0 +1,292 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+    <!-- LANDING -->
+    <main style="margin-top: 55px;" id="desktop">
+
+        <article>
+            <div id="demo" class="carousel slide bg-info h-100" data-ride="carousel">
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+                <div class="carousel-inner h-100 bg-light">
+
+                    <div style="background: url('{% static 'home/asssets/slides/1.jpg' %}');" class="carousel-item active img_bg bg-info h-100">
+                        <div
+                                class="w-100 bg_trans_50 h-100 d-flex p-5 text-center flex-wrap align-content-center justify-content-center">
+                            <div class="container text-left text-light">
+                                <div class="main_title_container">
+                                    <h3 class="text_brand_danger font-weight-bolder">LET US TAKE YOU TO</h3>
+                                    <h1 class="font-weight-bolder main_title">YOUR DREAM <br> DESTINATION</h1>
+                                    <p>
+                                        We are a travel and tour agency with a couple of years of tour experience.
+                                    </p>
+                                    <a href="#events" class="btn btn_brand_danger p-3 mr-2 font-weight-bold rounded-0">BOOK A TOUR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: url('{% static 'home/asssets/slides/team.jpg' %}');"
+                        class="carousel-item img_bg bg-info h-100">
+                        <div
+                            class="w-100 bg_trans_50 h-100 d-flex p-5 text-center flex-wrap align-content-center justify-content-center">
+                            <div class="container text-left text-light">
+                                <div class="main_title_container">
+                                    <h3 class="font-weight-bolder">EXPLORE THE WORLD</h3>
+                                    <h2 class="font-weight-bolder main_title em2">Team Of Global Travel Experts</h2>
+                                    <p>We hire the best tour agents and travel specialist to being you the top-notch tours, excursions and unmatched experience.</p>
+                                    <a href="events/" class="btn btn-light p-3 mr-2 font-weight-bold rounded-0">OUR EVENTS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: url('{% static 'home/asssets/slides/1.jpg' %}');"
+                        class="carousel-item img_bg bg-info h-100">
+                        <div
+                            class="w-100 bg_trans_50 h-100 d-flex p-5 text-center flex-wrap align-content-center justify-content-center">
+                            <div class="container text-left text-light">
+                                <div class="main_title_container">
+                                    <h3 class="font-weight-bolder">THE BEST YOU DESERVE</h3>
+                                    <h2 class="font-weight-bolder main_title">Let's Make Your Best Trip Ever</h2>
+                                    <p>
+                                        We are committed to offering travel services of the highest quality, combining our energy
+                                        and enthusiasm, with our experience.
+                                    </p>
+                                    <a href="#contact_us" class="btn btn-light p-3 mr-2 font-weight-bold rounded-0">TALK TO US</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+<!--                <a class="carousel-control-prev" href="#demo" data-slide="prev">-->
+<!--                    <span class="carousel-control-prev-icon"></span>-->
+<!--                </a>-->
+<!--                <a class="carousel-control-next" href="#demo" data-slide="next">-->
+<!--                    <span class="carousel-control-next-icon"></span>-->
+<!--                </a>-->
+            </div>
+        </article>
+
+    </main>
+    <main style="background: url('asssets/slides/1.jpg')" class="img_bg" id="mobile">
+            <div class="w-100 h-100 bg_trans_80 d-flex flex-wrap align-content-center justify-content-center">
+                <div class="container text-center">
+                    <div class="w-50 mx-auto">
+                        <img src="{% static 'home/asssets/logo.png' %}" alt="Lisadel Travel And Tour">
+                    </div>
+                    <h3 class="text_brand_danger font-weight-bolder">LET US TAKE YOU TO</h3>
+                    <h2 class="font-weight-bolder text-light main_title ff_aladin">YOUR DREAM <br> DESTINATION</h2>
+                    <p class="text-light">
+                        WE ARE A TRAVEL AND TOUR AGENCY WITH A COUPLE OF YEARS OF TOUR EXPERIENCE.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+    <!-- EVENTS -->
+    <section id="events" class="d-flex bg-light flex-wrap align-content-center justify-content-center">
+        <div class="container">
+            <h2 class="text-center font-weight-bolder">POPULAR TOUR <span class="text_brand_danger">PLACES</span></h2>
+            <hr>
+            <div class="row no-gutters d-flex flex-wrap justify-content-center">
+                {% for event in home_events %}
+
+
+                    <div class="col-sm-4 p-2">
+
+                            <div class="m-1 text-dark shadow-lg border-0 pointer card" onmouseover="visibility_show('xx')" onmouseout="visibility_hide('xx')">
+
+
+                                <img class="card-img-top rounded-top" src="{% static 'home/asssets/events/'%}{{  event.tour_uni  }}/cover.jpg" alt="Card image" style="width:100%">
+                                <div id="xx" style="visibility: hidden !important;" class="card-img-overlay bg_trans_50 d-flex flex-wrap align-content-center justify-content-center">
+                                    <a href="{%  url 'event' event.url_parse %}" class="btn btn-sm btn_brand_danger badge-pill">View Event</a>
+                                </div>
+
+                                <div class="card-body p-2">
+                                    <p class="text-dark font-weight-bold m-0">{{ event.title }}</p>
+                                    <p class="text-muted font-weight-bold m-0">
+                                        day<small>s</small> <?php echo $time_dur ?> Hrs
+                                    </p>
+                                </div>
+                            </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPRESSION -->
+    <section class="container-fluid bg-light d-flex flex-wrap align-content-center" id="impression">
+        <div class="container pt-5">
+            <div class="row no-gutters">
+                <div id="impression_img" class="col-sm-6">
+                    <img src="{% static 'home/asssets/home/impression.jpg' %}" height="100" alt="" class="img-fluid">
+                </div>
+                <div class="col-sm-6 pl-2 d-flex flex-wrap align-content-center">
+                    <div>
+                        <p class="text_brand_danger">Impressions</p>
+                        <h3 class="text_xxxl font-weight-bolder">
+                            Let's Make Your Tour Unforgettable
+                        </h3>
+                        <p class="text-muted">
+                            Travel is the movement of people between distant geographical locations.
+                            Travel can be done by foot, bicycle, automobile, train, boat, bus, airplane,
+                            ship or other means, with or without luggage, and can be one way or round trip. That monument
+                            is supposed to be special and memorable. Let us give you the best you deserve in a <span class="text_brand_danger">Luxurious</span> and
+                            <span class="text_brand_danger">Affordable</span> form,
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="row">
+            {% for service in all_services %}
+                <a href="{% url 'service' service.url_parse %}" class="col-sm-6 text-dark col-lg-4">
+                        <div class="feature-box-1">
+                            <div class="icon">
+                                <i class="fa fa-hands-helping"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>{{ service.title }}</h5>
+                                <p class="ellipsis_2">
+                                    {{ service.description }}
+                                </p>
+                            </div>
+                        </div>
+                </a>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- ABOUT US -->
+    <div id="about_us" class="w-100 bg-light pt-5">
+
+        <div class="container bg-light">
+            <h2 class="text-center">About Us</h2>
+            <div class="row no-gutters d-flex flex-wrap justify-content-center text-left">
+
+                <div class="col-sm-9">
+                    <div class="w-100 clearfix">
+                        <img src="{% static 'home/asssets/l_used.png' %}" alt="Event" class="img-fluid float-left w-25 mr-2">
+                        <p>
+                            Lisadel Travel & Tours is a well-established travel Agency that’s
+                            specializes in Tour packages all over the world, Hotel Reservation,
+                            Airline Ticketing With experienced staff members in handling inbound
+                            and outbound holidays and reservations.
+                        </p>
+                        <p>
+                            In Lisadel Travel & Tours, we serve our clients with the best
+                            assistance when
+                            it comes to the airline service and hospitality.
+                        </p>
+                        <p>
+                            Our specialty is the ability to design unique all-inclusive packages to fit every type of
+                            tourist, from the budget to the luxury. We offer unbeatable prices for Individuals,
+                            families and groups. If you’re looking for a vacation that provides a huge sense of
+                            personal recreation, fun, excitement, relaxation, adventure, Lisadel Travel & Tours
+                            is the best agency to contact.
+                        </p>
+                    </div>
+                </div>
+
+            </div> <hr>
+
+
+            <section class="team section">
+                <div class="container">
+                    <h2 class="section-title">Our Team Section</h2>
+                    <div class="row">
+
+                       {% for team in team_members %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="team-item">
+                                <figure> <img src="{% static 'home/asssets/team/' %}{{ team.img }}" alt="MRS ALICE SAGOE MANKOR">
+                                    <figcaption>
+                                        <div class="info">
+                                            <h3>{{ team.name }}</h3>
+                                            <p>{{ team.position }}</p>
+                                        </div>
+                                        <div class="social">
+                                            <a href="{{ team.twi }}" target="_blank" class="twitter" data-abc="true"><i class="fas fa-twitter"></i></a>
+                                            <a href="{{ team.fb }}" target="_blank" class="facebook" data-abc="true"><i class="fas fa-facebook"></i></a>
+                                            <a href="{{ team.linked }}" target="_blank" class="google-plus" data-abc="true"><i class="fas fa-linkedin"></i></a> </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- CONTACT US -->
+    <div id="contact_us" class="container-fluid pt-5">
+        <h2 class="text-center">Contact Us</h2>
+        <div class="container">
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.810423912135!2d-0.18917848579818644!3d5.603750934726888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9bc41b782185%3A0x33d950dd42149ad6!2sLISADEL%20TRAVEL%20%26%20TOURS!5e1!3m2!1sen!2sus!4v1639203500726!5m2!1sen!2sus"
+                    style="border:0; width: 100%; height: 450px"
+                    allowfullscreen=""
+                    loading="lazy"
+            >
+
+            </iframe>
+        </div>
+
+    <hr>
+        <!-- CONTACT-->
+        <div class="container mt-5 pb-2">
+            <div class="row no-gutters">
+                <div class="col-sm-6 d-flex flex-wrap align-content-between">
+                    <div>
+                        <h3>GET IN TOUCH</h3>
+                        <p>
+                            While we are good at providing out listed services, there are
+                            simpler ways for us to get intouch and answer your questions.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="mailto:info@lesadel.com" class="fas fa-envelope text_sm text-dark"> info@email.com</a><br>
+                        <a href="tel:+233 302 962 054" class="fas text_sm fa-phone text-dark"> +233 302 962 054</a> |
+                        <a href="tel:+233 550 727 877" class="fas text_sm fa-phone text-dark"> +233 550 727 877</a> |
+                        <a href="tel:+233 202 183650" class="fas text_sm fa-phone text-dark"> +233 202 183 650</a>
+                    </div>
+                </div>
+
+                <form id="contactForm" method="post" action="{% url 'contact_us' %}" class="col-sm-6 pl-2">
+                    {% csrf_token %}
+                    <input type="text" name="full_name" placeholder="Full Name" required autocomplete="off" class="rounded-0 form-control border-info mb-2">
+                    <input type="text" name="email_address" placeholder="Email Addrress" required autocomplete="off" class="rounded-0 form-control border-info mb-2">
+                    <input type="text" name="phone_number" placeholder="Phone Number" required autocomplete="off" class="rounded-0 form-control border-info mb-2">
+                    <textarea placeholder="message" required name="message" id="" cols="" class="rounded-0 form-control border-info mb-2" rows="5"></textarea>
+                    <button type="submit" class="btn btn-info rounded-0">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+
+{% endblock %}

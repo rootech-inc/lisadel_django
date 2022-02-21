@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+
+    <script>
+        $('#loader').modal('hide')
+    </script>
+
+    <div class="d-flex flex-wrap align-content-center justify-content-center bg-light" style="height: 100vh">
+
+        <div class="w-50 text-center alert alert-success">
+            Task Successful <br>
+            We will contact you shortly <br>
+            <div class="spinner-border"></div>
+        </div>
+
+    </div>
+
+    <script>
+    setTimeout(function () {
+        location.href='{% url 'home' %}'
+    }, 3000);
+    </script>
+
+{% endblock %}

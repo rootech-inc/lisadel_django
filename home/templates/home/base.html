@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- LOAD STATIC -->
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="canonical" href="http://www.lisadel.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% if title %}
+        <title>Lisadel Travel and Tours | {{ title }}</title>
+    {% else %}
+        <title>Lisadel Travel and Tours</title>
+    {% endif %}
+
+    {% if page_description %}
+        <meta name="description" content="{{ page_description }}">
+    {% else %}
+        <meta name="description" content="Best Travel and Tour in Ghana, Appointment Booking, Assistance in filling the application form, Vetting of supporting documents.">
+    {% endif %}
+
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static 'home/js/jquery.min.js' %}"></script>
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/cust.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'home/asssets/logo.png' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
+</head>
+<body>
+
+    <div class="modal" id="loader">
+    <div id="page_loader" style="height: 100vh !important" class="d-flex bg_brand_danger flex-wrap align-content-center justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+
+        </div>
+
+    </div>
+</div>
+    <script>
+        $('#loader').modal('show');
+
+    </script>
+
+    <header>
+
+        <nav class="navbar navbar-expand-md fixed-top" id="bg_brand">
+            <!-- Brand -->
+            <a class="navbar-brand" href="{% url 'home' %}"> Lisadel Travel And Tours</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'events' %}">EVENTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'services' %}">SERVICES</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    {% block body %}
+
+    {% endblock %}
+
+<!-- Footer -->
+<footer style="height: 100vh; overflow: visible" class="page-footer d-flex flex-wrap align-content-end font-small bg-light">
+
+    <div class="w-100">
+        <div class="unique-color-dark">
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row py-4 d-flex align-items-center">
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+                    <!-- Facebook -->
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-f white-text mr-4"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic">
+                        <i class="fab fa-twitter white-text mr-4"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic">
+                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic">
+                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+    </div>
+
+        <div class="w-100 bg_brand_danger">
+            <!-- Footer Links -->
+            <div style="" class="container text-light text-center text-md-left pt-5">
+
+                <!-- Grid row -->
+                <div class="row mt-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <!-- Content -->
+                        <h6 class="text-uppercase font-weight-bold">Lisadel Travel & Tours</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p class="text_sm">
+                            Our team of tour agents can provide you an unforgettable travel experience taking all your wishes and needs into account.
+                        </p>
+
+                        <p>Subscribe
+                            to our newsletter</p>
+
+                        <div class="w-100 d-flex flex-wrap justify-content-between">
+                            <input type="email" class="form-control rounded-0 w-75" placeholder="Email">
+                            <button class="btn btn-info rounded-0">Send</button>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Recent Events</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p class="text_sm">
+                            <a href="{% url 'events' %}" class="text-light">Dodi Cruise</a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'events' %}" class="text-light">Trip to Maaha</a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'events' %}" class="text-light">Trip to Dubai</a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'events' %}" class="text-light">Trip to Kanya</a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Services</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p class="text_sm">
+                            <a href="{% url 'services' %}" class="text-light">FLIGHT BOOKING
+                            </a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'services' %}" class="text-light">HOTEL & RESORT BOOKING
+                            </a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'services' %}" class="text-light">FAMILY TRIP PLANNING
+                            </a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'services' %}" class="text-light">TOUR
+                            </a>
+                        </p>
+                        <p class="text_sm">
+                            <a href="{% url 'services' %}" class="text-light">CORPORATE HOLIDAY
+                            </a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p class="text_sm">
+                            <i class="fas fa-home mr-3"></i> 48 Mensah Wood Ave, Accra Ghana.</p>
+                        <p class="text_sm">
+                            <i class="fas fa-envelope mr-3"></i> info@lisadeltravelandtours.com</p>
+                        <p class="text_sm">
+                            <i class="fas fa-phone mr-3"></i> +233 302 962 054</p>
+                        <p class="text_sm">
+                            <i class="fas fa-phone mr-3"></i> +233 550 727 877</p>
+                        <p class="text_sm">
+                            <i class="fas fa-phone mr-3"></i> +233 202 183 650</p>
+
+
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <!-- Copyright -->
+            <div class="footer-copyright unique-color-dark text-center py-3">
+                <p>© 2020 Copyright</p>
+                <a href="https://www.facebook.com/rootech17/"> Powered By Rootech.Inc</a>
+            </div>
+            <!-- Copyright -->
+        </div>
+    </div>
+
+</footer>
+<!-- Footer -->
+
+</body>
+</html>
+
+<script>
+    // HIDE
+
+    setTimeout(function () {
+        $('#loader').modal('hide');
+    }, 1000);
+</script>

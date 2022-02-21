@@ -1,0 +1,77 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+    <div style="height: 50vh; background: url('{% static 'home/asssets/gall/bg.png' %}')" class="p-0 text-center img_bg">
+
+        <div class="w-100 mt-5 rounded-0 text-light h-100 bg_trans_50 d-flex flex-wrap align-content-center justify-content-center">
+            <div class="text-center">
+                <h1 class="text-light font-weight-bolder">Trips</h1>
+                <p>
+                    A catalog of our <span class="text-success">successful</span>, <span class="text-secondary">ongoing</span> and <span class="text-primary">pending</span> trips. <br> Book one of our pending trips and you wont miss then fun.
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div id="eventDetailsMore" class="container pb-2">
+
+        <p>
+            Time flies. It's up to you to be the navigator.
+            Join our upcoming tour events to have the experience you deserve.
+        </p>
+        <p>
+            All the tour guides are extremely hospitable
+            and do their best to make sure that you have a nice time.
+            They are well-mannered and experienced in their job. Let us make your holiday and breaks a worthwhile.
+        </p>
+        <p>
+            At Lisadel, We</a> offers a wide range of up-scaled <a href="https://www.lisadeltravelandtours.com/services/">travel</a>
+            and tour services – including location selection and tour guarding to both personal and corporate clients. We have a natural
+            tradition built on experience, trust and professionalism. As a group that has travelled extensively worldwide, we speak from
+            corporate and personal accounts of accumulated experiences with our international network. So, we provide the best advice and,
+            a step further, a solution that maximises your intent.
+        </p>
+        <p>
+            Our specialty is the ability to design unique all-inclusive packages to fit every type of tourist, from the budget to the luxury.
+            We offer unbeatable prices for Individuals, families and groups. If you’re looking for a vacation that provides a huge sense of
+            personal recreation, fun, excitement, relaxation, adventure, Lisadel Travel & Tours is the best agency to contact.
+        </p>
+
+    </div>
+
+    <div class="container">
+
+            <hr>
+            <div class="row no-gutters d-flex flex-wrap justify-content-center">
+                {% for event in home_events %}
+
+
+                    <div class="col-sm-4 p-2">
+
+                            <div class="m-1 text-dark shadow-lg border-0 pointer card" onmouseover="visibility_show('xx')" onmouseout="visibility_hide('xx')">
+
+
+                                <img class="card-img-top rounded-top" src="{% static 'home/asssets/events/'%}{{  event.tour_uni  }}/cover.jpg" alt="Card image" style="width:100%">
+                                <div id="xx" style="visibility: hidden !important;" class="card-img-overlay bg_trans_50 d-flex flex-wrap align-content-center justify-content-center">
+                                    <a href="{%  url 'event' event.url_parse %}" class="btn btn-sm btn_brand_danger badge-pill">View Event</a>
+                                </div>
+
+                                <div class="card-body p-2">
+                                    <p class="text-dark font-weight-bold m-0">{{ event.title }}</p>
+                                    <p class="text-muted font-weight-bold m-0">
+                                        day<small>s</small> <?php echo $time_dur ?> Hrs
+                                    </p>
+                                </div>
+                            </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+
+{% endblock %}

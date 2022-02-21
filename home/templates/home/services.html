@@ -1,0 +1,39 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+
+    <div style="height: 75vh; padding-top: 65px; background: url('{% static 'home/asssets/gall/bg.png' %}')" class="jumbotron  p-0 text-center d-flex flex-wrap align-content-center justify-content-center">
+        <div class="d-flex flex-wrap bg_trans_50 align-content-center justify-content-center w-100 h-100">
+            <div class="text-center">
+                <h1 class="text-center text_brand_danger mb-4 font-weight-bolder">Our Services</h1>
+                <a href="#contact" class="btn btn-info rounded-0">TALK TO US</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            {% for service in services %}
+                <a href="{% url 'service' service.url_parse %}" class="col-sm-6 text-dark col-lg-4">
+                        <div class="feature-box-1">
+                            <div class="icon">
+                                <i class="fa fa-hands-helping"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>{{ service.title }}</h5>
+                                <p class="ellipsis_2">
+                                    {{ service.description }}
+                                </p>
+                            </div>
+                        </div>
+                </a>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

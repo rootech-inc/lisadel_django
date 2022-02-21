@@ -1,0 +1,250 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+
+
+
+    <div style="height: 80vh; background: url('{% static 'home/asssets/events/'%}{{  event.tour_uni  }}/cover.jpg')" class="p-0 text-center img_bg">
+
+        <div class="w-100 jumbotron rounded-0 text-light h-100 bg_trans_50 d-flex flex-wrap align-content-center justify-content-center">
+        <div class="text-center container">
+            <h1 class="text-light font-weight-bolder">{{ event.title }}</h1>
+            <?php
+
+                $s_d = explode('-',$event['start_date']);
+                $s=mktime(0,0,0,$s_d[1], $s_d[2], $s_d[0]);
+                $sd = date("d M Y", $s);
+                $e_d = explode('-',$event['end_date']);
+                $e=mktime(0,0,0,$e_d[1], $e_d[2], $e_d[0]);
+                $ed = date("d M Y", $e);
+
+            ?>
+            <p>{{ event.start_date }} - {{ event.end_date }} ?></p>
+
+            <p>
+                <?php echo substr($event['overview'],0,50) ?>...
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+
+    <!-- DETAILS -->
+    <div class="container mt-4">
+
+        <div class="row no-gutters">
+
+        <div class="col-sm-9 pr-1 p-2">
+            <!-- TOUR HEAD -->
+            <div class="w-100">
+                <h3>{{ event.title }}</h3>
+                <p class="text-muted">
+                    {{ event.country }} - {{ event.country }}
+                </p>
+            </div>
+            <hr class="w-100">
+
+            <!-- EVENT DETAILS -->
+            <div class="row no-gutter">
+                <!-- DURATION -->
+                <div class="col-sm-3 pr-1">
+                    <p class="m-0 fa fa-clock-o"> Duration</p>
+                    <p class="text-muted m-0 pl-3"><?php
+                        $start_date = $event['start_date'];
+                        $end_date = $event['end_date'];
+                        $start_hr = $event['start_time'];
+                        $end_time = $event['end_time'];
+                        $time_dur = dateDifference($end_time,$start_hr,'%h');
+                        echo dateDifference($start_date,$end_date);
+                        ?> days <?php echo $time_dur ?> Hrs </p>
+                </div>
+
+                <!-- TYPE -->
+                <div class="col-sm-3 pr-1">
+                    <p class="m-0 fa fa-umbrella"> Type</p>
+                    <p class="text-muted m-0 pl-3">{{ event.type }}</p>
+                </div>
+
+                <!-- Group Size -->
+                <div class="col-sm-3 pr-1">
+                    <p class="m-0 fa fa-group"> Group Size</p>
+                    <p class="text-muted m-0 pl-3">{{ event.group_size }}</p>
+                </div>
+
+                <!-- LOCATION -->
+                <div class="col-sm-3 pr-1">
+                    <p class="m-0 fa fa-globe"> Location</p>
+                    <p class="text-muted m-0 pl-3">{{ event.country }}</p>
+                </div>
+
+            </div>
+            <hr class="w-100">
+
+            <!-- Overview -->
+            <strong>Overview</strong>
+            <div class="mb-3">
+                {{ event.overview }}
+            </div>
+
+            <!-- PACKAGING -->
+            <p class="text-muted">Packages</p>
+            <div class="row gutters d-flex mb-3 flex-wrap justify-content-center">
+
+
+                {% for package in packages %}
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="plan-card plan-one">
+                                <div class="pricing-header <?php if(is_even($od)){echo 'green';} else{echo 'orange';} ?>">
+                                    <h4 class="plan-title">{{ package.description }}</h4>
+                                    <div class="plan-cost">₵
+                                        {{ package.cost }}
+                                    </div>
+                                </div>
+                                <ul class="plan-features">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                {% endfor %}
+            </div>
+
+            <!-- EVENT SCHEDULE -->
+            <div id="schedule" class="pt90 mb-3 pb90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 mr-auto ml-auto text-center">
+                            <div class="center-title mb60">
+                                <h2>Event Schedule</h2>
+                                <p class="lead">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    {% for schedule in schedules %}
+
+                        <div class="row mx-auto event_display margin-b-30">
+
+                            <div class="col-sm-6 mb-5 event-info">
+                            <span>
+                                <?php
+                                $day = explode('-',$sch['date'])[2];
+                                echo date('D', strtotime($sch['date']));
+                                ?>
+                            </span>
+                                <span>{{ schedule.date }}</span>
+                                <span>{{ schedule.time }}</span>
+                                <span class="event-hall">{{ schedule.location }}</span>
+                            </div>
+                            <div class="col-sm-6 event-detail">
+                                <h3>{{ schedule.title }}</h3>
+                                <div class="row margin-b-20">
+                                    <div class="col-sm-10">
+                                        <p>
+                                            {{ schedule.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        {% if event_days != '0:00:00' %}
+            <form id="eupload_file_form" action="{% url 'event_booking' %}" method="post" class="col-sm-3 pl-1 p-2 sticky-top">
+                {% csrf_token %}
+
+
+            <hr class="bg_brand_danger w-100 mt-0">
+            <input type="hidden" name="eventTitle" value="{{ event.title }}">
+            <input type="hidden" name="event" value="{{ event.tour_uni }}">
+            <div class="card p-1 custom_shadow">
+                <hr>
+                <div class="c_header p-2">
+                    <p class="m-0 text_brand">Select Package</p>
+                </div>
+                <div class="custom-control custom-radio">
+                    {% for package in packages %}
+                        <input required type="radio" id="pack{{ package.pk }}" name="package" value="{{ package.description }}{{ package.cost }}">
+                        <label for="pack{{ package.pk }}">{{ package.description }} ({{ package.cost }})</label><br>
+                    {% endfor %}
+                </div>
+                <div class="input-group mb-3 border p-2 custom_shadow">
+                    <label for="" class="w-100">Full Name</label>
+                    <input required type="text" name="fullName" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- Email -->
+                <div class="input-group mb-3 border p-2 custom_shadow">
+                    <label for="" class="w-100">Email Address</label>
+                    <input type="email" name="emailAddress" class="form-control form-control-sm rounded-0">
+                </div>
+
+                <!-- PHONE NUMBER -->
+                <div class="input-group mb-3 border p-2 custom_shadow">
+                    <label for="" class="w-100">Phone Number</label>
+                    <input name="phoneNumber" type="tel" required class="form-control form-control-sm rounded-0">
+                </div>
+
+                <button type="submit" class="w-100 btn btn_brand rounded-0">BOOK</button>
+            </div>
+        </form>
+        {% endif %}
+
+        {% if event_days == '0:00:00' %}
+            <div class="col-sm-3 pl-1 p-2">
+                <button class="btn btn_brand rounded-0">EVENT UNAVAILABLE</button>
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+    </div>
+
+    <!-- gallery -->
+    <div class="container">
+        <h3 class="text-center"><span class="text_brand_danger">GALLERY</span></h3>
+        <div style="background: none !important;">
+
+            <div ID="lisadel_event" data-nanogallery2='{
+                "itemsBaseURL": "",
+                "thumbnailWidth": "200",
+                "thumbnailLabel": {
+                  "position": "overImageOnBottom"
+                },
+                "thumbnailAlignment": "center",
+                "thumbnailOpenImage": true
+              }'>
+                <a href="{% static 'home/asssets/events/' %}{{ event.tour_uni }}/cover.jpg" data-ngthumb="{% static 'home/asssets/events/' %}{{ event.tour_uni }}/cover.jpg" data-ngdesc="">Berlin 1</a>
+                {% for img in gall %}
+                    <a href="{% static 'home/asssets/events/' %}{{ event.tour_uni }}/{{ gall.media_name }}" data-ngthumb="{% static 'home/asssets/events/' %}{{ event.tour_uni }}/thumbs/{{ gall.media_name }}" data-ngdesc="">Berlin 1</a>
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

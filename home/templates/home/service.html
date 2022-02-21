@@ -1,0 +1,97 @@
+{% extends 'home/base.html' %}
+<!-- LOAD STATIC -->
+{% load static %}
+
+{% block body %}
+
+    <div style="height: 50vh; margin-top: 65px; background: url('{% static 'home/asssets/services/' %}{{ service.img }}')" class="jumbotron container  p-0 text-center d-flex flex-wrap align-content-center justify-content-center">
+        <div class="d-flex flex-wrap bg_trans_50 align-content-center w-100 h-100">
+            <div class="w-100 p-2">
+                <h1 class="text_brand_danger text-left mb-4 font-weight-bolder">{{ title }}</h1>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                {{ service.description }}
+
+                <h3 class="mt-5">Other Services</h3>
+                <div class="row">
+                   {% for service in all_services %}
+
+
+                        <div class="col-sm-4">
+
+                            <div class="m-1 text-dark shadow-lg border-0 pointer card" onmouseover="visibility_show('xx{{ service.pk }}')" onmouseout="visibility_hide('xx{{ service.pk }}')">
+
+
+                                <img class="card-img-top rounded-top" src="{% static 'home/asssets/services/'%}{{ service.img }}" alt="Card image" style="width:100%">
+                                <div id="xx{{ service.pk }}" style="visibility: hidden !important;" class="card-img-overlay bg_trans_50 d-flex flex-wrap align-content-center justify-content-center">
+                                    <a href="{%  url 'service' service.url_parse %}" class="btn btn-sm btn_brand_danger badge-pill">Details</a>
+                                </div>
+
+                                 <div class="card-body p-2">
+                                    <p class="text-dark font-weight-bold m-0">{{ service.title }}</p>
+                                    <div class="w-100">
+                                        <p class="text-muted ellipsis_2">{{ service.description }}</p>
+                                    </div>
+                                 </div>
+                            </div>
+
+                        </div>
+
+
+                   {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="col-sm-3">
+
+                <form id="eupload_file_form" action="{% url 'event_booking' %}" method="post" class="sticky-top">
+                    {% csrf_token %}
+
+                    <hr class="bg_brand_danger w-100 mt-0">
+                    <input type="hidden" name="function" value="book_v2">
+                    <input type="hidden" name="event" value="<?php echo $uni ?>">
+                    <div class="card custom_shadow">
+                        <div class="card-header text-center">
+                            <strong class="card-title">Book for consultation</strong>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="input-group mb-3 border p-2 custom_shadow">
+                            <label for="" class="w-100">Full Name</label>
+                            <input required type="text" name="name" class="form-control form-control-sm rounded-0">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="input-group mb-3 border p-2 custom_shadow">
+                            <label for="" class="w-100">Email Address</label>
+                            <input type="email" name="email" class="form-control form-control-sm rounded-0">
+                        </div>
+
+                        <!-- PHONE NUMBER -->
+                        <div class="input-group mb-3 border p-2 custom_shadow">
+                            <label for="" class="w-100">Phone Number</label>
+                            <input name="phone" type="tel" required class="form-control form-control-sm rounded-0">
+                        </div>
+
+                        <button type="submit" class="w-100 btn btn_brand rounded-0">BOOK</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}
