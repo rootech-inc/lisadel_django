@@ -85,12 +85,12 @@ def single_event(request, value):
         return Http404("Event Does Nt Exist")
     # get packages
     event_title = event.title
-    from home.forms import EventBooking
+    from home.forms import EventBookingForm
 
     packages = TourPackage.objects.filter(event=event.tour_uni)
     schedules = TourSchedule.objects.filter(event=event.tour_uni)
     event_days = event.start_date - datetime.date.today()
-    gall = gallery.objects.filter(event=event.tour_uni)
+    gall = TourGallery.objects.filter(event=event.tour_uni)
     form = EventBooking()
 
     if len(event.overview) < 100:
@@ -103,7 +103,7 @@ def single_event(request, value):
                'packages': packages,
                'schedules': schedules,
                'event_days': event_days,
-               'gall': gall,
+               'event_images': gall,
                'title': " Events | " + str(event.title),
                'page_description': page_description,
                'form': form
@@ -195,8 +195,9 @@ def get_name(request):
             if emailAddress:
                 recipients.append(emailAddress)
 
-            if send_mail(subject, message, sender, recipients, fail_silently=False):
-                ## insert into database
+            # if send_mail(subject, message, sender, recipients, fail_silently=False):
+            if 10 > 1:
+                # insert into database
                 thisBook = bookings(client_name=fullName, event=event, phone_number=phoneNumber,
                                     email_address=emailAddress, booking_package=package, city=loc, country=loc,
                                     region=loc, loc=loc)

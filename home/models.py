@@ -63,7 +63,7 @@ class TourSchedule(models.Model):
         return self.event + ' - ' + self.description
 
 
-class gallery(models.Model):
+class TourGallery(models.Model):
     event = models.TextField()
     media_type = models.TextField()
     media_name = models.TextField()
@@ -73,7 +73,7 @@ class gallery(models.Model):
     date_added = models.DateField()
 
     def __str__(self):
-        return self.event + ' - ' + self.description
+        return self.title + ' - ' + self.media_name
 
 
 class services(models.Model):
